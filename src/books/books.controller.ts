@@ -1,7 +1,9 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { BooksService } from '../services/books.service';
-import { BookDto } from '../dto/book.dto';
-import { DatatableDTO } from '../dto/datatable.dto';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import { ApiBearerAuth } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { BooksService } from './books.service';
+import { BookDto } from './dto/book.dto';
+import { DatatableDTO } from './dto/datatable.dto';
 
 @Controller('api/v1/books')
 export class BooksController {
@@ -13,7 +15,7 @@ export class BooksController {
   }
 
   @Get()
-  findAll(dto:DatatableDTO) {
+  findAll(@Param('dto') dto:DatatableDTO) {
     return this.booksService.findAll(dto);
   }
 
@@ -27,6 +29,8 @@ export class BooksController {
     return this.booksService.update(+id, dto);
   }
 
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.booksService.remove(+id);
