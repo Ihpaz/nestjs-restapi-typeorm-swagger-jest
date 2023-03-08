@@ -25,26 +25,4 @@ export class ConfigService {
         return parseInt(process.env[key], 10);
     }
 
-    getBoolean(key: string): boolean {
-        if (this.envConfig) return this.envConfig[key] === 'true';
-        return process.env[key] === 'true';
-    }
-
-    getObject<T>(key: string): T {
-        try {
-            if (this.envConfig) return JSON.parse(this.envConfig[key]) as T;
-            return JSON.parse(process.env[key]) as T;
-        } catch (e) {
-            return null;
-        }
-    }
-
-    getArray<T>(key: string): T[] {
-        try {
-            if (this.envConfig) return JSON.parse(this.envConfig[key]) as T[];
-            return JSON.parse(process.env[key]) as T[];
-        } catch (e) {
-            return [];
-        }
-    }
 }

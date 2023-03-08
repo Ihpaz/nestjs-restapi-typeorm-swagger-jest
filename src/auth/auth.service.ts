@@ -11,19 +11,21 @@ export class AuthService {
     ) {}
 
   async validateUser(dto: AuthDTO){
-    // if (user && user.UserPwd === dto.UserPwd) {
-    //   return user
-    // }
+
+    //only for test 
+    if ( dto.Password === dto.Password) {
+      return true
+    }
 
     return false;
   }
 
-  async login(dto: AuthDTO) {
+  async generateToken(dto: AuthDTO) {
    
       const validate:any = await this.validateUser(dto);
 
       if(validate){
-        const payload = { Email: dto.Email, Role: dto.Role };
+        const payload = { Email: dto.Email };
        
         return {
           response:"Success",
