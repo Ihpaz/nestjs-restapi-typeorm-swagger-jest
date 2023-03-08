@@ -1,5 +1,5 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Query } from '@nestjs/common';
-import { ApiBadRequestResponse, ApiBearerAuth, ApiCreatedResponse, ApiFoundResponse, ApiNotFoundResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBadRequestResponse, ApiBearerAuth, ApiCreatedResponse, ApiFoundResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { AuthService } from './auth.service';
 import { AuthDTO } from './dto/auth.dto';
@@ -9,6 +9,10 @@ import { AuthDTO } from './dto/auth.dto';
 export class AuthController {
     constructor(private readonly authService: AuthService) {}
 
+       
+    @ApiOperation({
+      summary:'Get token'
+    })
     @Post()
     @ApiBadRequestResponse({    
       description: 'Bad Request',

@@ -1,5 +1,5 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Query } from '@nestjs/common';
-import { ApiBadRequestResponse, ApiBearerAuth, ApiCreatedResponse, ApiFoundResponse, ApiNotFoundResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBadRequestResponse, ApiBearerAuth, ApiCreatedResponse, ApiFoundResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiProperty, ApiTags, ApiUnauthorizedResponse } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { BooksService } from './books.service';
 import { BookDto } from './dto/book.dto';
@@ -12,6 +12,10 @@ export class BooksController {
   constructor(private readonly booksService: BooksService) {}
 
   
+  
+  @ApiOperation({
+    summary:'Create book'
+  })
   @Post()
   @ApiBadRequestResponse({    
     description: 'Bad Request',
@@ -39,7 +43,10 @@ export class BooksController {
 
 
 
- 
+   
+  @ApiOperation({
+    summary:'Get pagination book'
+  })
   @Get()
   @ApiOkResponse({
     type:ResponseBookDatatable
@@ -49,6 +56,10 @@ export class BooksController {
   }
 
 
+     
+  @ApiOperation({
+    summary:'Get 1 detail book'
+  })
   @ApiNotFoundResponse({    
     description: 'Book was Not Found',
     schema:{
@@ -68,7 +79,10 @@ export class BooksController {
   }
 
 
-
+   
+  @ApiOperation({
+    summary:'Update book'
+  })
   @ApiNotFoundResponse({    
     description: 'Book was Not Found',
     schema:{
@@ -88,6 +102,39 @@ export class BooksController {
   }
 
 
+
+
+  @ApiOperation({
+    summary:'Delete book, fisrt fill authorizations with token, to get token example, you can generate Auth Api'
+  })
+  @ApiNotFoundResponse({    
+    description: 'Book was Not Found',
+    schema:{
+      type:'object',
+      example:{
+        statusCode:404,
+        message:"Not Found"
+      }
+    }
+  })
+  @ApiUnauthorizedResponse({    
+    description: 'Unauthorized',
+    schema:{
+      type:'object',
+      example:{
+        statusCode:401,
+        message:"Unauthorized"
+      }
+    }
+  })
+  @ApiOkResponse({
+    schema:{
+      type:'object',
+      example:{
+        message:'deleted successfully'
+      }
+    }
+  })
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @Delete(':id')

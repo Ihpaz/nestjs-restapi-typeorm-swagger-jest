@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 
 @Entity()
 export class Book {
@@ -8,8 +8,8 @@ export class Book {
   id: number;
 
   @ApiProperty()
-  @Column('simple-array', { nullable: true })
-  Author: string[];
+  @Column()
+  Author: string;
 
   @ApiProperty()
   @Column()
@@ -24,7 +24,15 @@ export class Book {
   Tags: string[];
   
   @ApiProperty()
-  @Column()
-  Publisher: string;
+  @Column('simple-array', { nullable: true })
+  Publisher: string[];
+
+  @ApiProperty()
+  @CreateDateColumn()
+  created_at: Date; // Creation date
+
+  @ApiProperty()
+  @UpdateDateColumn()
+  updated_at: Date; // Last updated date
 
 }

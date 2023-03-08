@@ -89,8 +89,11 @@ export class BooksService {
    //throw error when not exist
    await this.findOne(id)
 
-   const data= await this.bookRepository.delete(id);
-   return data;
+    await this.bookRepository.delete(id);
+    
+    return {
+      message:"deleted successfully"
+    }
   }
 
   generateParam(param:string){
