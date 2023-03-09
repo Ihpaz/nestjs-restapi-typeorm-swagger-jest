@@ -22,8 +22,7 @@ export class AuthController {
           
             statusCode: 400,
             message: [
-              "Publisher should not be empty",
-              "Publisher must be a string"
+              "Email must be an email"
             ],
             error: "Bad Request"
           
