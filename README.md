@@ -24,7 +24,19 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+[Nest](https://github.com/nestjs/nest) 
+
+This is REST Api simple project using Nest Js with  unit testing,  and Swagger Api Documentation.
+
+To Access Swagger Doc : example url http://localhost:3001/
+
+This project uses Mysql Database
+
+Please create databas with name : mengajionline
+
+and rename .env-example file
+
+Thank you.
 
 ## Installation
 
@@ -36,7 +48,7 @@ $ npm install
 
 ```bash
 # development
-$ npm run start
+$ npm run start or npm run serve
 
 # watch mode
 $ npm run start:dev
