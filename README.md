@@ -34,7 +34,7 @@ This project uses Mysql Database
 
 Please create databas with name : mengajionline
 
-and rename .env-example file
+and rename .example-env file
 
 Thank you.
 
