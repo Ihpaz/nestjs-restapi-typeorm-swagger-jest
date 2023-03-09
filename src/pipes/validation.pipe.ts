@@ -5,7 +5,6 @@ import { validate, ValidationError } from 'class-validator';
 @Injectable()
 export class ValidationPipe implements PipeTransform<any> {
   async transform(value: any, { metatype }: ArgumentMetadata) {
-    console.log(value,'value')
 
     if (!metatype || !this.toValidate(metatype)) {
       return value;
@@ -34,7 +33,6 @@ export class ValidationPipe implements PipeTransform<any> {
     }
 
     if (errors.length > 0) {
-      console.log(errors,'error')
       throw new HttpException({ message: 'Validation failed', errors: errorBody }, 400);
     }
 
@@ -42,8 +40,6 @@ export class ValidationPipe implements PipeTransform<any> {
   }
 
   private toValidate(metatype: any): boolean {
-    console.log(metatype,'metatype')
-
     const types: any[] = [String, Boolean, Number, Array, Object];
     return !types.includes(metatype);
   }
