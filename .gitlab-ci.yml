@@ -1,0 +1,15 @@
+stages:
+  - deploy
+
+deploy:
+  stage: deploy
+  tags:
+    - nestjs  # Ensure this matches the tag of your GitLab Runner (optional, if you used one)
+  script:
+    - echo "Starting deployment on VPS..."
+    - cd /path/to/your/nestjs/project  # Change to your project directory
+    - git pull origin main             # Pull the latest code
+    - npm install --production         # Install dependencies (without devDependencies)
+    - npm run build                    # Build the NestJS app
+    - pm2 reload ecosystem.config.js || pm2 start dist/main.js --name nestjs-app  # Reload PM2 or start the app
+    - pm2 save                         # Save PM2 configuration to restart app after reboot
