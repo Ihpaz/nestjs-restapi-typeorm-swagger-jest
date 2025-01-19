@@ -32,7 +32,7 @@ To Access Swagger Doc : example url http://localhost:3001/
 
 This project uses Mysql Database
 
-Please create databas with name : mengajionline
+Please create databas with name : nestapiswagger
 
 and rename .example-env file
 
